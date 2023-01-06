@@ -24,7 +24,7 @@ For now, no there isn't one.
   * Download the latest release (yes I know, not yet released)
   * [**DO NOT**]() extract, directly put `YuLunCommonLib.zip` file into your project's folder
   * Use `#include "YuLunCommonLib.zip"` in the scripts which you want to use this library (check the path, here only for example)
-  * Call function `LibVerWatch()` **OR** `LibVerPrint()` anywhere in script would show the version of library you've installed
+  * Call function `LibVerWatch()` **OR** `LibVerPrint()` anywhere in script would show information of library you've installed
   * Ready to use, happy scripting :)
 ### From source code
   * I would let you to figure out how on yourself :D 
