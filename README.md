@@ -16,8 +16,11 @@ value = BinToDec("110101")  -- 0b110101 -> 53
 4. **UI Modules**
 5. **Other extention functions**
 
+## Issues & Pull Requests
+Feel free to submit any [issues](../../issues) or [pull requests](../../pulls) within the scope of this project.
+
 ## Wiki
-For now, no there isn't one.
+For now, no there isn't one. (soon™️)
 
 ## Installation
 ### From release page
@@ -28,9 +31,6 @@ For now, no there isn't one.
   * Ready to use, happy scripting :)
 ### From source code
   * I would let you to figure out how on yourself :D
-
-## Issues & Pull Requests
-Feel free to submit any [issues](../../issues) or [pull requests](../../pulls) within the scope of this project.
 
 ## Other
 1. Licence Template from [ChooseALicense.com](https://github.com/github/choosealicense.com)
