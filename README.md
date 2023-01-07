@@ -19,8 +19,7 @@ value = BinToDec("110101")  -- 0b110101 -> 53
 ## Issues & Pull Requests
 Feel free to submit any [issues](../../issues) or [pull requests](../../pulls) within the scope of this project.
 
-## Wiki
-For now, no there isn't one. (soon™️)
+## [Wiki](../../wiki)
 
 ## Installation
 ### From release page
