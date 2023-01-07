@@ -34,7 +34,7 @@ end
 
 function UiHexTextShadow(hexColor, opt_alpha, opt_distance, opt_blur)
 	local r, g, b = HexToRGB(hexColor, false)
-	UiTextShadow(r, g, b, opt_alpha or 1, opt_thickness or 1.0, opt_blur or 0.5)
+	UiTextShadow(r, g, b, opt_alpha or 1, opt_distance or 1.0, opt_blur or 0.5)
 end
 
 function UiRGBTextShadow(RGBcolor, opt_alpha, opt_distance, opt_blur)
