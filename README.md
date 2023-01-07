@@ -8,7 +8,7 @@
 UiHexColor("0f459a")
 UiRGBColor({240, 93, 115})
 ```
-2. [**Pack Operations**](../../wiki)
+2. [**Pack Operations**](../../wiki/Pack-Operation)
 3. **Number System Conversion**
 ```lua
 value = BinToDec("110101")  -- 0b110101 -> 53
