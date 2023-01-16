@@ -1,5 +1,5 @@
 --	ui.lua	bu YuLun
---	Jan 06 2023
+--	Jan 16 2023
 
 function UiHexColor(hexColor, opt_alpha)
 	local r, g, b = HexToRGB(hexColor, false)
@@ -66,6 +66,38 @@ end
 
 function UiRGBButtonPressColor(RGBcolor, opt_alpha)
 	UiButtonPressColor(RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1)
+end
+
+function UiScaleShear(direction, scale)
+	local direction = direction:lower()
+	if direction ~= "x" and direction ~= "y" then
+		return
+	end
+	local scale = (tonumber(scale) or 0)*0.735
+	local scaleSign = scale/math.abs(scale)
+	local scaleVal = math.abs(scale or 0)+1
+	local const = -2/(scaleVal+1)+2
+	local rotAng = math.atan(1/scaleVal)
+	local rotAngDeg = math.deg(rotAng)
+	local scaleAngDeg = 45-rotAngDeg
+
+	local xScale = math.sqrt(2/(1+scaleVal^2))
+	local yScale = 1/(const*math.cos(math.rad(scaleAngDeg)))
+	if direction == "y" then
+		xScale, yScale = yScale, xScale
+	end
+
+	for i=1, 2 do
+		-- no idea why twice but it works
+		UiScale(xScale, yScale)
+		UiRotate(-rotAngDeg*scaleSign)
+		if direction == "y" then
+			UiScale(1, scaleVal)
+		else
+			UiScale(scaleVal, 1)
+		end
+		UiRotate(45*scaleSign)
+	end
 end
 
 function UiToggleTextButton(condition, textList, width, height)

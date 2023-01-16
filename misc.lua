@@ -1,5 +1,5 @@
 --	misc.lua	by YuLun
---	Jan 06 2023
+--	Jan 16 2023
 
 function math.clamp(lower, value, upper)
 	if lower > upper then lower, upper = upper, lower end
@@ -7,11 +7,7 @@ function math.clamp(lower, value, upper)
 end
 
 function math.cycle(value, max, opt_decrease)
-	if opt_decrease then
-		local offset = max > 2 and (value+max-3)%max+1 or value
-		return offset%max+1
-	end
-	return cycle%max + 1
+	return ((opt_decrease and max > 2) and (value+max-3)%max+1 or value)%max + 1
 end
 
 function BinToDec(binNum)
@@ -19,7 +15,7 @@ function BinToDec(binNum)
 end
 
 function DecToBin(decNum)
-	return string.reverse(table.concat(NumToBin(decNum, 2)))
+	return NumToBin(decNum, 2, true)
 end
 
 function HexToDec(hexNum)
@@ -30,7 +26,7 @@ function DecToHex(decNum)
 	return string.format("%x", decNum)
 end
 
-function NumToBin(numStr, base)
+function NumToBin(numStr, base, opt_returnStr)
 	local digitTable = {}
 	local value = tonumber(numStr, base) or 0
 	local _, digits = math.frexp(value)
@@ -38,6 +34,7 @@ function NumToBin(numStr, base)
 		digitTable[i] = math.floor(value/(2^(i-1)))
 		value = value%(2^(i-1))
 	end
+	if opt_returnStr then return string.reverse(table.concat(digitTable)) end
 	return digitTable
 end
 
@@ -45,15 +42,16 @@ function NumToDec(numStr, base)
 	return tonumber(numStr, base)
 end
 
-function NumToHex(numStr, base)
+function NumToHex(numStr, base, opt_hexTable, opt_returnStr)
 	local digitTable = {}
 	local value = tonumber(numStr, base) or 0
 	local _, digits = math.frexp(value)
 	digits = math.ceil(digits/4)
 	for i=digits, 1, -1 do
-		digitTable[i] = math.floor(value/(16^(i-1)))
+		digitTable[i] = (opt_hexTable or opt_returnStr) and string.format("%x", math.floor(value/(16^(i-1)))) or math.floor(value/(16^(i-1)))
 		value = value%(16^(i-1))
 	end
+	if opt_returnStr then return string.reverse(table.concat(digitTable)) end
 	return digitTable
 end
 

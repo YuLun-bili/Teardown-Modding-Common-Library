@@ -1,5 +1,5 @@
 --	packs.lua	by YuLun
---	Jan 06 2023
+--	Jan 16 2023
 
 function ImportPacks(registry, fileName, category)
 	local packNum = 0
@@ -52,7 +52,9 @@ function ActivateMaster(registry)
 end
 
 function ActivatePack(registry, index)
-	SetBool(registry..".packs."..index..".active", true)
+	for i, pack in ipairs(ListKeys(registry..".packs")) do
+		SetBool(registry..".packs."..pack..".active", index == i)
+	end
 	SetBool(registry..".pack.menu", false)
 end
 
