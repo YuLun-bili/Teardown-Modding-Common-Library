@@ -1,5 +1,5 @@
 --	body.lua	by YuLun
---	Jan 06 2023
+--	Jan 16 2023
 
 function GetBodyJoints(handle)
 	local shapes = GetBodyShapes(handle)
@@ -11,6 +11,34 @@ function GetBodyJoints(handle)
 		end
 	end
 	return joints
+end
+
+function GetBodyLights(handle)
+	local shapes = GetBodyShapes(handle)
+	local lights = {}
+	for i, shape in ipairs(shapes) do
+		local tempLights = GetShapeLights(shape)
+		for j, light in ipairs(tempLights) do
+			table.insert(lights, light)
+		end
+	end
+	return lights
+end
+
+function GetBodyVoxelCount(handle)
+	local shapes = GetBodyShapes(handle)
+	local count = 0
+	for i, shape in ipairs(shapes) do
+		count = count+(GetShapeVoxelCount(shape) or 0)
+	end
+	return count
+end
+
+function SetBodyCollisionFilter(handle, layer, mask)
+	local shapes = GetBodyShapes(handle)
+	for i, shape in ipairs(shapes) do
+		SetShapeCollisionFilter(shape, layer, mask)
+	end
 end
 
 function GetBodyHeading(handle, opt_vec)
