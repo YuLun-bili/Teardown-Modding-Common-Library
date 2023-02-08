@@ -14,7 +14,7 @@ UiRGBColor({240, 93, 115})
 value = BinToDec("110101")  -- 0b110101 -> 53
 ```
 4. **UI Modules**
-5. **Other extention functions**
+5. **Other extention functions** (game entity related)
 
 ## Issues & Pull Requests
 Feel free to submit any [issues](../../issues) or [pull requests](../../pulls) within the scope of this project.
@@ -23,7 +23,7 @@ Feel free to submit any [issues](../../issues) or [pull requests](../../pulls) w
 
 ## Installation
 ### From release page
-  * Download the latest release
+  * Download the [latest release](../../releases/latest)
   * [**DO NOT**](../../) extract, directly put `YuLunCommonLib.zip` file into your project's folder
   * Use `#include "YuLunCommonLib.zip"` in the scripts which you want to use this library (check the path, here only for example)
   * Call function `LibVerWatch()` **OR** `LibVerPrint()` anywhere in script would show information of library you've installed
