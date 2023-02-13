@@ -1,7 +1,7 @@
 ---
 name: Version Update Template
-about: Version x.x.x Changes and Improvements
-title: ''
+about: Update tasks
+title: Version x.x.x Changes and Improvements
 labels: on-going
 assignees: ''
 
