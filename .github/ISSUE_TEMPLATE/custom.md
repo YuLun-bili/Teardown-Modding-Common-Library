@@ -1,6 +1,6 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
+name: Version Update Template
+about: Informations about an update
 title: ''
 labels: ''
 assignees: ''
