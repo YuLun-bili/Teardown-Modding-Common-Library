@@ -46,3 +46,20 @@ function GetBodyHeading(handle, opt_vec)
 	local heading = TransformToParentVec(trans, opt_vec or Vec(0, 0, -1))
 	return heading
 end
+
+function GetBodyCentre(handle)
+	local min, max = GetBodyBounds(handle)
+	return VecLerp(min, max, 0.5)
+end
+
+function IsBodyTouching(body0, body1)
+	local min0, max0 = GetBodyBounds(body0)
+	local min1, max1 = GetBodyBounds(body1)
+	local bodyCentre0 = VecLerp(min0, max0, 0.5)
+	local bodyCentre1 = VecLerp(min1, max1, 0.5)
+	local inCheck0 = IsPointInAabb(min0, min1, max1) or IsPointInAabb(max0, max1, max1)
+	local inCheck1 = IsPointInAabb(min1, min0, max0) or IsPointInAabb(max1, max0, max0)
+	if not IsAabbOverlapping(min0, max0, min1, max1) then return false end
+
+	--TODO
+end
