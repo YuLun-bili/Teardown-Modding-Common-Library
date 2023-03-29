@@ -168,7 +168,38 @@ function UiDrawSelectTab(list, selectVal, width, height, font, size, Hex0, Hex1,
 			UiTranslate(tabWidth, 0)
 		end
 	UiPop()
+	return selectVal
+end
 
+function UiDrawVertialSelectTab(list, selectVal, width, height, font, size, Hex0, Hex1, Hex2, Hex3)	--	optional: font ~ Hex3
+	font = font or "bold.ttf"
+	Hex0, Hex1, Hex2, Hex3 = Hex0 or "ffffff", Hex1 or "bbffbb", Hex2 or "909090", Hex3 or "85ff85"
+	local tabNum = #list
+	local tabHeight = height/tabNum
+	size = size or tabHeight*0.15
+	UiPush()
+		UiAlign("top left")
+		for i=1, tabNum do
+			UiPush()
+				UiHexColor(Hex0)
+				if selectVal == i then UiHexColor(Hex3) end
+				UiHexButtonImageBox("ui/common/box-outline-4.png", 8, 8, Hex0)
+				UiHexButtonHoverColor(Hex1)
+				UiHexButtonPressColor(Hex2)
+				UiButtonPressDist(0.5)
+				UiFont(font, size)
+				if UiTextButton(list[i], width, tabHeight) then selectVal = i end
+				if selectVal == i then
+					UiPush()
+						UiTranslate(width-5)
+						UiHexColor("000000")
+						UiRect(5, tabHeight)
+					UiPop()
+				end
+			UiPop()
+			UiTranslate(0, tabHeight)
+		end
+	UiPop()
 	return selectVal
 end
 
@@ -194,4 +225,38 @@ function UiHexDrawSlider(picPath0, picPath1, value, min, max, opt_gap, opt_direc
 		end
 	UiPop()
 	return value, done
+end
+
+function UiFormatValueUnit(value, unit, opt_fontValue, opt_fontUnit, opt_sizeValue, opt_sizeUnit, opt_format)
+	local value = tonumber(value) or 0
+	local format = opt_format or "%d"
+	local success, errData = pcall(string.format, format, value)
+	if not success then error(errData:gsub("'format'", "argument #7 in 'UiFormatValueUnit'", 1), 2) end
+	local unit = tostring(unit or "")
+	local fontValue = opt_fontValue or "regular.ttf"
+	local fontUnit = opt_fontUnit or "regular.ttf"
+	local sizeValue = tonumber(opt_sizeValue) or 30
+	local sizeUnit = tonumber(opt_sizeUnit) or 18
+	local unitW = 2
+	UiPush()
+		UiHexColor("ffffff")
+		UiFont(fontValue, sizeValue)
+		local valLen, valH = UiGetTextSize(errData)
+		UiTranslate(valLen, 0)
+		UiPush()
+			UiAlign("right middle")
+			UiText(errData)
+		UiPop()
+		UiTranslate(2, 0)
+		if unit ~= "" then
+			UiFont(fontUnit, sizeUnit)
+			unitW = UiGetTextSize(unit)
+			UiPush()
+				UiTranslate(0, valH/2)
+				UiAlign("left bottom")
+				UiText(unit)
+			UiPop()
+		end
+	UiPop()
+	UiTranslate(valLen+unitW, 0)
 end
