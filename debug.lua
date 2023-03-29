@@ -96,9 +96,9 @@ function DebugAabb(min, max, opt_r, opt_g, opt_b, opt_alpha)
 	end
 end
 
-function DebugHEXAabb(min, max, hexColor, opt_alpha)
+function DebugHexAabb(min, max, hexColor, opt_alpha)
 	local checkList = {min, max}
-	local name = "DebugHEXAabb"
+	local name = "DebugHexAabb"
 	for l=1, 2 do
 		if type(checkList[l]) ~= "table" then
 			error([[bad argument #]]..l..[[ to ']]..name..[[' (table [vector] expected, got ]]..type(checkList[l])..[[)]], 2)

@@ -120,9 +120,9 @@ function DrawAabb(min, max, opt_r, opt_g, opt_b, opt_alpha)
 	end
 end
 
-function DrawHEXAabb(min, max, hexColor, opt_alpha)
+function DrawHexAabb(min, max, hexColor, opt_alpha)
 	local checkList = {min, max}
-	local name = "DrawHEXAabb"
+	local name = "DrawHexAabb"
 	for l=1, 2 do
 		if type(checkList[l]) ~= "table" then
 			error([[bad argument #]]..l..[[ to ']]..name..[[' (table [vector] expected, got ]]..type(checkList[l])..[[)]], 2)
