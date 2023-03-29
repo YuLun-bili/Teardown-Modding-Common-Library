@@ -19,10 +19,10 @@ end
 
 function FormatAabb(min, max)
 	local checkList = {min, max}
+	local name = "FormatAabb"
 	for l=1, 2 do
 		if type(checkList[l]) ~= "table" then
-			error([[unexpected variable type for argument #]]..l..[[ (table [Teardown vector] expected)]], 2)
-			return
+			error([[bad argument #]]..l..[[ to ']]..name..[[' (table [vector] expected, got ]]..type(checkList[l])..[[)]], 2)
 		end
 		local checkPoint = true
 		local point = checkList[l]
@@ -31,8 +31,7 @@ function FormatAabb(min, max)
 			if not checkPoint then break end
 		end
 		if not checkPoint then
-			error([[unexpected variable type for argument #]]..l..[[ (table [Teardown vector] expected)]], 2)
-			return
+			error([[bad argument #]]..l..[[ to ']]..name..[[' (table [vector] expected, got table)]], 2)
 		end
 	end
 	local newMin, newMax = {}, {}
@@ -45,10 +44,10 @@ end
 
 function IsPointInAabb(point, min, max)
 	local checkList = {point, min, max}
+	local name = "IsPointInAabb"
 	for l=1, 3 do
 		if type(checkList[l]) ~= "table" then
-			error([[unexpected variable type for argument #]]..l..[[ (table [Teardown vector] expected)]], 2)
-			return
+			error([[bad argument #]]..l..[[ to ']]..name..[[' (table [vector] expected, got ]]..type(checkList[l])..[[)]], 2)
 		end
 		local checkPoint = true
 		local Cpoint = checkList[l]
@@ -57,14 +56,17 @@ function IsPointInAabb(point, min, max)
 			if not checkPoint then break end
 		end
 		if not checkPoint then
-			error([[unexpected variable type for argument #]]..l..[[ (table [Teardown vector] expected)]], 2)
-			return
+			error([[bad argument #]]..l..[[ to ']]..name..[[' (table [vector] expected, got table)]], 2)
 		end
 	end
-	local Lmin, Lmax = FormatAabb(min, max)
+	local Lmin, Lmax = {}, {}
+	for i=1, 3 do
+		Lmin[i] = min[i] < max[i] and min[i] or max[i]
+		Lmax[i] = max[i] > min[i] and max[i] or min[i]
+	end
 	local inCheck = true
 	for i=1, 3 do
-		inCheck = point[i] > Lmin[i] and point[i] < Lmax[i] and inCheck
+		inCheck = point[i] >= Lmin[i] and point[i] <= Lmax[i] and inCheck
 		if not inCheck then break end
 	end
 	return inCheck
@@ -72,10 +74,10 @@ end
 
 function IsAabbOverlapping(min0, max0, min1, max1)
 	local checkList = {min0, max0, min1, max1}
+	local name = "IsAabbOverlapping"
 	for l=1, 4 do
 		if type(checkList[l]) ~= "table" then
-			error([[unexpected variable type for argument #]]..l..[[ (table [Teardown vector] expected)]], 2)
-			return
+			error([[bad argument #]]..l..[[ to ']]..name..[[' (table [vector] expected, got ]]..type(checkList[l])..[[)]], 2)
 		end
 		local checkPoint = true
 		local point = checkList[l]
@@ -84,21 +86,24 @@ function IsAabbOverlapping(min0, max0, min1, max1)
 			if not checkPoint then break end
 		end
 		if not checkPoint then
-			error([[unexpected variable type for argument #]]..l..[[ (table [Teardown vector] expected)]], 2)
-			return
+			error([[bad argument #]]..l..[[ to ']]..name..[[' (table [vector] expected, got table)]], 2)
 		end
 	end
-	local Lmin0, Lmax0 = FormatAabb(min0, max0)
-	local Lmin1, Lmax1 = FormatAabb(min1, max1)
+	local Lmin0, Lmax0, Lmin1, Lmax1 = {}, {}, {}, {}
+	for i=1, 3 do
+		Lmin0[i] = min0[i] < max0[i] and min0[i] or max0[i]
+		Lmax0[i] = max0[i] > min0[i] and max0[i] or min0[i]
+		Lmin1[i] = min1[i] < max1[i] and min1[i] or max1[i]
+		Lmax1[i] = max1[i] > min1[i] and max1[i] or min1[i]
+	end
 	if (IsPointInAabb(Lmin0, Lmin1, Lmax1) and IsPointInAabb(Lmax0, Lmin1, Lmax1)) or (IsPointInAabb(Lmin1, Lmin0, Lmax0) and IsPointInAabb(Lmax1, Lmin0, Lmax0)) then
 		return true
 	end
 	local overCheck = true
 	for i=1, 3 do
 		local totalLen = Lmax0[i]-Lmin0[i]+Lmax1[i]-Lmin1[i]
-		local diffLen0, diffLen1 = Lmax0[i]-Lmin1[i], Lmax1[i]-Lmin0[i]
-		local diffLen = diffLen0 > diffLen1 and diffLen0 or diffLen1
-		overCheck = diffLen > totalLen and overCheck
+		local diffLen = (Lmax0[i]>Lmax1[i] and Lmax0[i] or Lmax1[i]) - (Lmin0[i]<Lmin1[i] and Lmin0[i] or Lmin1[i])
+		overCheck = diffLen <= totalLen and overCheck
 		if not overCheck then break end
 	end
 	return overCheck

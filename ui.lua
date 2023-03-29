@@ -7,6 +7,9 @@ function UiHexColor(hexColor, opt_alpha)
 end
 
 function UiRGBColor(RGBcolor, opt_alpha)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #2 to 'UiRGBColor' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	UiColor(RGBcolor[1] or 1, RGBcolor[2] or 1, RGBcolor[3] or 1, opt_alpha or 1)
 end
 
@@ -20,6 +23,9 @@ function UiHexColorFilter(hexColor, opt_alpha)
 end
 
 function UiRGBColorFilter(RGBcolor, opt_alpha)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #1 to 'UiRGBColorFilter' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	UiColorFilter(RGBcolor[1] or 1, RGBcolor[2] or 1, RGBcolor[3] or 1, opt_alpha or 1)
 end
 
@@ -29,6 +35,9 @@ function UiHexTextOutline(hexColor, opt_alpha, opt_thickness)
 end
 
 function UiRGBTextOutline(RGBcolor, opt_alpha, opt_thickness)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #1 to 'UiRGBTextOutline' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	UiTextOutline(RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1, opt_thickness or 0.1)
 end
 
@@ -38,6 +47,9 @@ function UiHexTextShadow(hexColor, opt_alpha, opt_distance, opt_blur)
 end
 
 function UiRGBTextShadow(RGBcolor, opt_alpha, opt_distance, opt_blur)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #1 to 'UiRGBTextShadow' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	UiTextShadow(RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1, opt_distance or 1.0, opt_blur or 0.5)
 end
 
@@ -47,6 +59,9 @@ function UiHexButtonImageBox(path, borderWidth, borderHeight, hexColor, opt_alph
 end
 
 function UiRGBButtonImageBox(path, borderWidth, borderHeight, RGBcolor, opt_alpha)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #4 to 'UiRGBButtonImageBox' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	UiButtonImageBox(path, borderWidth, borderHeight, RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1)
 end
 
@@ -56,6 +71,9 @@ function UiHexButtonHoverColor(hexColor, opt_alpha)
 end
 
 function UiRGBButtonHoverColor(RGBcolor, opt_alpha)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #1 to 'UiRGBButtonHoverColor' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	UiButtonHoverColor(RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1)
 end
 
@@ -65,6 +83,9 @@ function UiHexButtonPressColor(hexColor, opt_alpha)
 end
 
 function UiRGBButtonPressColor(RGBcolor, opt_alpha)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #1 to 'UiRGBButtonPressColor' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	UiButtonPressColor(RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1)
 end
 

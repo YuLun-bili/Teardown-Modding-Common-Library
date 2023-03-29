@@ -23,6 +23,9 @@ function DrawHexLine(pos0, pos1, hexColor, opt_alpha)
 end
 
 function DrawRGBLine(pos0, pos1, RGBcolor, opt_alpha)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #3 to 'DrawRGBLine' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	DrawLine(pos0, pos1, RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1)
 end
 
@@ -32,6 +35,9 @@ function DrawShapeHexOutline(handle, hexColor, opt_alpha)
 end
 
 function DrawShapeRGBOutline(handle, RGBcolor, opt_alpha)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #2 to 'DrawShapeRGBOutline' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	DrawShapeOutline(handle, RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1)
 end
 
@@ -41,6 +47,9 @@ function DrawBodyHexOutline(handle, hexColor, opt_alpha)
 end
 
 function DrawBodyRGBOutline(handle, RGBcolor, opt_alpha)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #2 to 'DrawBodyRGBOutline' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	DrawBodyOutline(handle, RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1)
 end
 
@@ -50,5 +59,8 @@ function DrawHexSprite(handle, trans, width, height, hexColor, opt_alpha, opt_de
 end
 
 function DrawRGBSprite(handle, trans, width, height, RGBcolor, opt_alpha, opt_depthTest, opt_additive)
+	if type(RGBcolor) ~= "table" then
+		error([[bad argument #5 to 'DrawRGBSprite' (table [RGB] expected, got ]]..type(RGBcolor)..[[)]], 2)
+	end
 	DrawSprite(handle, trans, width, height, RGBcolor[1], RGBcolor[2], RGBcolor[3], opt_alpha or 1, opt_depthTest, opt_additive)
 end
