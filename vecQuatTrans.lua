@@ -1,5 +1,5 @@
 --	vec.lua	by YuLun
---	Jan 06 2023
+--	Mar 29 2023
 
 function VecAlignXZ(vec0, vec1)
 	return VecNormalize(VecCross(vec0, vec1))
